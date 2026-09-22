@@ -1,0 +1,193 @@
+{
+  "last_verified": "2026-09-23",
+  "cards": [
+    {
+      "name": "HDFC Regalia Gold",
+      "issuer": "HDFC Bank",
+      "annual_fee": 2500,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": 400000,
+      "base_rate": 0.0125,
+      "rates": {
+        "myntra": 0.0625,
+        "nykaa": 0.0625,
+        "reliance_digital": 0.0625
+      },
+      "monthly_caps": {},
+      "notes": "Base valuation assumes 5 RP/₹200 and ₹0.50/RP travel redemption. 5X partner rate assumes same valuation.",
+      "source": "https://www.hdfc.bank.in/credit-cards/regalia-gold-credit-card"
+    },
+    {
+      "name": "HDFC Marriott Bonvoy",
+      "issuer": "HDFC Bank",
+      "annual_fee": 3000,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": null,
+      "base_rate": 0.01,
+      "rates": {
+        "marriott": 0.04,
+        "travel": 0.02,
+        "dining": 0.02
+      },
+      "monthly_caps": {},
+      "notes": "Illustrative rupee-value assumptions only; Bonvoy point value varies materially by redemption. Renewal Free Night Award can dominate the economics.",
+      "source": "https://www.hdfc.bank.in/credit-cards/marriott-bonvoy-credit-card"
+    },
+    {
+      "name": "HDFC Swiggy Ornge",
+      "issuer": "HDFC Bank",
+      "annual_fee": 500,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": 150000,
+      "base_rate": 0.01,
+      "rates": {
+        "swiggy": 0.05,
+        "amazon": 0.05,
+        "online_shopping": 0.05
+      },
+      "monthly_caps": {
+        "swiggy": 500,
+        "online_shopping": 500
+      },
+      "notes": "5% applies only to eligible Swiggy spends and selected online merchants/categories; actual merchant eligibility/caps follow issuer T&Cs.",
+      "source": "https://www.hdfc.bank.in/credit-cards/swiggy-ornge-hdfc-bank-credit-card"
+    },
+    {
+      "name": "RBL IndianOil",
+      "issuer": "RBL Bank",
+      "annual_fee": 500,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": 175000,
+      "base_rate": 0.005,
+      "rates": {
+        "fuel": 0.05,
+        "indianoil": 0.05
+      },
+      "monthly_caps": {
+        "fuel": 500
+      },
+      "notes": "5% valueback at eligible IndianOil outlets: 10 fuel points/₹100, 1 point=₹0.50; max 1,000 fuel points/month.",
+      "source": "https://www.rbl.bank.in/personal-banking/cards/credit-cards/indianoil-rbl-bank-credit-card"
+    },
+    {
+      "name": "RBL World Safari",
+      "issuer": "RBL Bank",
+      "annual_fee": 3000,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": null,
+      "base_rate": 0.005,
+      "rates": {
+        "travel": 0.0125,
+        "international": 0.0
+      },
+      "monthly_caps": {},
+      "notes": "Value assumes ₹0.25/RBL reward point for travel redemption. International purchases earn no reward points; card's 0% forex benefit is not modeled as rewards.",
+      "source": "https://www.rbl.bank.in/personal-banking/cards/credit-cards/world-safari-credit-card"
+    },
+    {
+      "name": "Uni GoldX",
+      "issuer": "Uni",
+      "annual_fee": 0,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": null,
+      "base_rate": 0.01,
+      "rates": {
+        "international": 0.01,
+        "upi": 0.01
+      },
+      "monthly_caps": {},
+      "notes": "Modeled as 1% eligible rewards plus 0% forex; forex savings are evaluated separately in the app.",
+      "source": "https://www.uni.cards/"
+    },
+    {
+      "name": "YES Bank World Select",
+      "issuer": "YES BANK",
+      "annual_fee": 599,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": null,
+      "base_rate": 0.005,
+      "rates": {
+        "online_shopping": 0.01,
+        "upi": 0.005
+      },
+      "monthly_caps": {},
+      "notes": "Approximation. Confirm the exact YES card variant and its current rewards before acting on a close/keep decision.",
+      "source": "https://www.yes.bank.in/personal-banking/cards/credit-cards"
+    },
+    {
+      "name": "YES BANK RuPay Credit Card",
+      "issuer": "YES BANK",
+      "annual_fee": 0,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": null,
+      "base_rate": 0.0025,
+      "rates": {
+        "online_shopping": 0.0025,
+        "upi": 0.005
+      },
+      "monthly_caps": {
+        "upi_reward_points": 5000,
+        "utilities_value": 37.5
+      },
+      "notes": "Lifetime-free virtual RuPay card. 4 YES Rewardz/₹200 on qualifying merchant UPI transactions only when the individual UPI transaction is above ₹2,000; modeled at up to ₹0.25/point = 0.5%. Other non-UPI spend: 2 YES Rewardz/₹200 = up to 0.25%. UPI rewards capped at 5,000 points/month. Utility rewards capped at 150 points/statement cycle. P2P UPI is not allowed.",
+      "source": "https://www.yes.bank.in/content/published/api/v1.1/assets/CONTF197EA325EBA47E3830C00F6089E02AE/native/ybl_rupay_credit_card_usage_guide.pdf?channelToken=21f7ccfa2fc3401091938f541a6f8f2a&download=false"
+    },
+    {
+      "name": "HSBC Live+",
+      "issuer": "HSBC",
+      "annual_fee": 999,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": 200000,
+      "base_rate": 0.015,
+      "rates": {
+        "dining": 0.1,
+        "food_delivery": 0.1,
+        "grocery": 0.1,
+        "shopping": 0.1,
+        "utilities": 0.1,
+        "swiggy": 0.1,
+        "blinkit": 0.1,
+        "myntra": 0.1,
+        "amazon": 0.1
+      },
+      "monthly_caps": {
+        "accelerated_total": 1200
+      },
+      "notes": "10% accelerated cashback up to ₹1,200/month across eligible dining, food delivery, grocery, shopping and utility spends; 1.5% on most other eligible spends.",
+      "source": "https://www.hsbc.bank.in/credit-cards/products/live-plus/"
+    },
+    {
+      "name": "Amazon Pay ICICI",
+      "issuer": "ICICI Bank",
+      "annual_fee": 0,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": null,
+      "base_rate": 0.01,
+      "rates": {
+        "amazon": 0.05
+      },
+      "monthly_caps": {},
+      "notes": "Assumes Amazon Prime member for 5% Amazon cashback. Non-Prime rate differs.",
+      "source": "https://www.icicibank.com/personal-banking/cards/credit-card/amazon-pay-credit-card"
+    },
+    {
+      "name": "CASHBACK SBI Card",
+      "issuer": "SBI Card",
+      "annual_fee": 999,
+      "gst_on_fee": 0.18,
+      "fee_waiver_spend": 200000,
+      "base_rate": 0.01,
+      "rates": {
+        "online_shopping": 0.05,
+        "amazon": 0.05,
+        "myntra": 0.05
+      },
+      "monthly_caps": {
+        "online": 2000,
+        "offline": 2000
+      },
+      "notes": "From 1 Apr 2026: 5% online capped at ₹2,000/statement cycle and 1% offline capped at ₹2,000; several categories excluded.",
+      "source": "https://www.sbicard.com/cashback-revised"
+    }
+  ]
+}
