@@ -41,7 +41,18 @@ with st.sidebar:
     st.caption("For maximum privacy, run this app locally on your own computer.")
     st.header("Assumptions")
     is_prime = st.checkbox("Amazon Prime member", value=True)
-    default_pdf_password = st.text_input("PDF password (optional)", type="password", help="Used only to open encrypted statements in this session.")
+    st.header("PDF passwords")
+    st.caption("Different issuers use different statement passwords. Put every one you use here, one per line \u2014 each file is tried against all of them until one opens it.")
+    _pw_blob = st.text_area(
+        "Passwords (one per line)",
+        value="",
+        height=120,
+        placeholder="SHUB1503\nyesbank@123\n4509",
+        help="Tried in order against every encrypted PDF you upload. Never stored or sent anywhere.",
+    )
+    PDF_PASSWORDS = [ln.strip() for ln in _pw_blob.splitlines() if ln.strip()]
+    if PDF_PASSWORDS:
+        st.caption(f"{len(PDF_PASSWORDS)} password(s) loaded for this session.")
     foreign_markup_baseline = st.number_input("Typical forex markup on alternative card (%)", 0.0, 5.0, 3.5, 0.1)
 
 DEFAULT_EXISTING = [
@@ -65,13 +76,38 @@ def normalize_amount(x):
     try: return float(s)
     except: return None
 
-def parse_pdf(uploaded, password=""):
+def parse_pdf(uploaded, passwords=()):
+    """Parse a statement PDF, trying every supplied password until one opens it.
+
+    Returns (DataFrame, password_that_worked | None).
+    """
     data = uploaded.getvalue()
     reader = PdfReader(io.BytesIO(data))
+    used_password = None
+
     if reader.is_encrypted:
-        ok = reader.decrypt(password or "")
-        if not ok:
-            raise ValueError("Encrypted PDF: password did not work")
+        # blank first (some PDFs are encrypted with an empty owner password)
+        candidates, seen = [], set()
+        for pw in [""] + [p for p in passwords if p]:
+            if pw not in seen:
+                seen.add(pw)
+                candidates.append(pw)
+
+        opened = False
+        for pw in candidates:
+            try:
+                trial = PdfReader(io.BytesIO(data))   # fresh reader per attempt
+                if trial.decrypt(pw):
+                    reader, used_password, opened = trial, (pw or None), True
+                    break
+            except Exception:
+                continue
+
+        if not opened:
+            n = len([c for c in candidates if c])
+            if n == 0:
+                raise ValueError("Encrypted PDF \u2014 add its password in the sidebar")
+            raise ValueError(f"Encrypted PDF \u2014 tried {n} password(s), none opened it")
     text = "\n".join((p.extract_text() or "") for p in reader.pages)
     rows = []
     for raw in text.splitlines():
@@ -86,7 +122,7 @@ def parse_pdf(uploaded, password=""):
         desc = line[dm.end():am.start()].strip(" -|:")
         if len(desc) < 2: continue
         rows.append({"date": dm.group("date"), "description": desc, "amount": amount})
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows), used_password
 
 def parse_tabular(uploaded):
     name = uploaded.name.lower()
@@ -150,6 +186,7 @@ def reward_for(card, row):
     return reward
 
 frames, file_errors = [], []
+unlocked_with = {}
 if files:
     st.markdown("#### Map each statement to the card/account used")
     for i, f in enumerate(files):
@@ -158,7 +195,12 @@ if files:
         with c2:
             account = st.selectbox("Account/card", ["Debit / Bank account"] + existing, key=f"acct_{i}")
         try:
-            df = parse_pdf(f, default_pdf_password) if f.name.lower().endswith(".pdf") else parse_tabular(f)
+            if f.name.lower().endswith(".pdf"):
+                df, _used_pw = parse_pdf(f, PDF_PASSWORDS)
+                if _used_pw:
+                    unlocked_with[f.name] = _used_pw
+            else:
+                df = parse_tabular(f)
             if not df.empty:
                 df["source_file"] = f.name
                 df["account"] = account
@@ -167,6 +209,12 @@ if files:
                 file_errors.append(f"{f.name}: no transactions detected")
         except Exception as e:
             file_errors.append(f"{f.name}: {e}")
+
+if unlocked_with:
+    with st.expander(f"Unlocked {len(unlocked_with)} encrypted file(s) \u2014 which password worked"):
+        for fname, pw in unlocked_with.items():
+            masked = pw[:2] + "\u2022" * max(len(pw) - 2, 1)
+            st.write(f"\u2022 **{fname}** \u2014 opened with `{masked}`")
 
 if file_errors:
     with st.expander("Files needing attention"):
